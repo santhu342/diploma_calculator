@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
+  <title>Diploma Marks Calucation</title>
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
@@ -21,6 +21,7 @@
       </ul>
     </nav>
 <div class="container">
+<h4>Diploma Marks Calucation</h4>
 <div class="row">
     <div class='col-sm-1'>
         
@@ -33,22 +34,22 @@
           </div>
           <div class="form-group">
             <label for="email">3rd Sem Marks(900)</label>
-            <input type="text" class="form-control" name="f_st" placeholder="Enter 3rd Year Marks" />
+            <input type="text" class="form-control" name="t_rt" placeholder="Enter 3rd Year Marks" />
           </div>
           <div class="form-group">
             <label for="email">4th Sem Marks(900)</label>
-            <input type="text" class="form-control" name="f_st" placeholder="Enter 4th Year Marks" />
+            <input type="text" class="form-control" name="fu_th" placeholder="Enter 4th Year Marks" />
           </div>
           <div class="form-group">
             <label for="email">5th Sem Marks(900)</label>
-            <input type="text" class="form-control" name="f_st" placeholder="Enter 5th Year Marks" />
+            <input type="text" class="form-control" name="fi_th" placeholder="Enter 5th Year Marks" />
           </div>
           <div class="form-group">
             <label for="email">6th Sem Marks(300)</label>
-            <input type="text" class="form-control" name="f_st" placeholder="Enter 6th Year Marks" />
+            <input type="text" class="form-control" name="si_th" placeholder="Enter 6th Year Marks" />
           </div>
           
-          <button type="submit" id="view_marks" class="btn btn-primary btn-block">View MArks</button>
+          <button type="button" id="view_marks" class="btn btn-primary btn-block">View MArks</button>
         </form>
     </div>
     <div class='col-sm-5'>
@@ -57,7 +58,7 @@
                 <td>Award Marks</td><td>Total Marks</td>
             </tr>
             <tr>
-                <td><span id="total"></span></td><td><span id="award"></span></td>
+                <td><span id="award"></span></td><td><span id="total"></span></td>
             </tr>
         </table>
     </div>
@@ -69,9 +70,19 @@
 </body>
 <script>
 $(document).ready(function(){
-    $('view_marks').click(funtion(
-        alert('sxasa');
-    ));    
+    $('#view_marks').click(function(){
+        var f_st = parseInt($("input[name='f_st']").val()),
+        t_rt = parseInt($("input[name='t_rt']").val()),
+        fu_th = parseInt($("input[name='fu_th']").val()),
+        fi_th = parseInt($("input[name='fi_th']").val()),
+        si_th = parseInt($("input[name='si_th']").val())
+        
+        award = f_st + t_rt + fu_th + fi_th + si_th;
+        total = 250+900+900+900+300
+        
+        $("#award").text(award)
+        $("#total").text(total)
+    });    
 });
 
 
