@@ -55,10 +55,10 @@
     <div class='col-sm-5'>
         <table class="table table-border">
             <tr>
-                <td>Award Marks</td><td>Total Marks</td>
+                <td>Award Marks</td><td>Total Marks</td><td>Percentage</td>
             </tr>
             <tr>
-                <td><span id="award"></span></td><td><span id="total"></span></td>
+                <td><span id="award"></span></td><td><span id="total"></span></td><td><span id="percent"></span></td>
             </tr>
         </table>
     </div>
@@ -77,11 +77,16 @@ $(document).ready(function(){
         fi_th = parseInt($("input[name='fi_th']").val()),
         si_th = parseInt($("input[name='si_th']").val())
         
+        f_st = parseInt(f_st*25/100)
+        
         award = f_st + t_rt + fu_th + fi_th + si_th;
         total = 250+900+900+900+300
         
+        percent = ((award/total)*100).toFixed(2);
+        
         $("#award").text(award)
         $("#total").text(total)
+        $("#percent").text(percent)
     });    
 });
 
