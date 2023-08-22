@@ -30,28 +30,58 @@
         <form >
           <div class="form-group">
             <label for="email">1st Year Marks</label>
-            <input type="text" class="form-control" name="f_st" placeholder="Enter 1st Year Marks" />
-            <input type="text" class="form-control" name="f_st_t" placeholder="Enter 1st Year Total Marks" />
+            <div class="row">
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="f_st" placeholder="Enter 1st Year Marks" />
+                </div>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="f_st_t" placeholder="Enter 1st Year Total Marks" />
+                </div>
+            </div>
           </div>
           <div class="form-group">
             <label for="email">3rd Sem Marks</label>
-            <input type="text" class="form-control" name="t_rt" placeholder="Enter 3rd Year Marks" />
-            <input type="text" class="form-control" name="t_rt_t" placeholder="Enter 3rd Year Total Marks" />
+            <div class="row">
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="t_rt" placeholder="Enter 3rd Year Marks" />
+                </div>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="t_rt_t" placeholder="Enter 3rd Year Total Marks" />
+                </div>
+            </div>
           </div>
           <div class="form-group">
             <label for="email">4th Sem Marks</label>
-            <input type="text" class="form-control" name="fu_th" placeholder="Enter 4th Year Marks" />
-            <input type="text" class="form-control" name="fu_th_t" placeholder="Enter 4th Year Total Marks" />
+            <div class="row">
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="fu_th" placeholder="Enter 4th Year Marks" />
+                </div>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="fu_th_t" placeholder="Enter 4th Year Total Marks" />
+                </div>
+            </div>
           </div>
           <div class="form-group">
             <label for="email">5th Sem Marks</label>
-            <input type="text" class="form-control" name="fi_th" placeholder="Enter 5th Year Marks" />
-            <input type="text" class="form-control" name="fi_th_t" placeholder="Enter 5th Year Total Marks" />
+            <div class="row">
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="fi_th" placeholder="Enter 5th Year Marks" />
+                </div>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="fi_th_t" placeholder="Enter 5th Year Total Marks" />
+                </div>
+            </div>
           </div>
           <div class="form-group">
             <label for="email">6th Sem Marks</label>
-            <input type="text" class="form-control" name="si_th" placeholder="Enter 6th Year Marks" />
-            <input type="text" class="form-control" name="si_th_t" placeholder="Enter 6th Year Total Marks" />
+            <div class="row">
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="si_th" placeholder="Enter 6th Year Marks" />
+                </div>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="si_th_t" placeholder="Enter 6th Year Total Marks" />
+                </div>
+            </div>
           </div>
           
           <button type="button" id="view_marks" class="btn btn-primary btn-block">View MArks</button>
@@ -81,12 +111,18 @@ $(document).ready(function(){
         t_rt = parseInt($("input[name='t_rt']").val()),
         fu_th = parseInt($("input[name='fu_th']").val()),
         fi_th = parseInt($("input[name='fi_th']").val()),
-        si_th = parseInt($("input[name='si_th']").val())
+        si_th = parseInt($("input[name='si_th']").val()),
+        
+        f_st_t = parseInt($("input[name='f_st_t']").val()),
+        t_rt_t = parseInt($("input[name='t_rt_t']").val()),
+        fu_th_t = parseInt($("input[name='fu_th_t']").val()),
+        fi_th_t = parseInt($("input[name='fi_th_t']").val()),
+        si_th_t = parseInt($("input[name='si_th_t']").val())
         
         f_st = parseInt(f_st*25/100)
         
         award = f_st + t_rt + fu_th + fi_th + si_th;
-        total = 250+900+900+900+300
+        total = f_st_t + t_rt_t + fu_th_t + fi_th_t + si_th_t;
         
         percent = ((award/total)*100).toFixed(2);
         
