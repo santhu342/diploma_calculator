@@ -24,6 +24,9 @@
   <h1>ANITS Salary Calculation</h1>
   <h5>Salary Scale</h5>
   <p>6700-200-7300-220-7960-240-8680-260-9460-280-10300-300-11200-330-12190-360-13270-390-14440-420-15700-450-17050-490-18520-530-20110-570-21820-610-23650-650-25600-700-27700-750-29950-800-32350-850-34900-900-37600-970-40510-1040-43630-1110-46960</p>  <!-- -1200-51760-1300-55660 -->
+    <div class="row" id="basic_IV">
+        
+    </div>
   
 </div>
 
@@ -52,8 +55,17 @@
             final_increment.push(st_increment)
             j++;
         } 
-        console.log(final_basic , final_increment)
+        //console.log(final_basic , final_increment)
         
+        var basic_IV = "";
+        
+        for(i=0; i < final_basic.length -1; i++){
+            //basic_IV += "<div class='col-sm-2' ><div clas=='row'><span class='col-sm-4 text-success' >" + final_basic[i] + "</span><span class='col-sm-2 text-danger' > + </span> <span class='col-sm-4 text-info' > " + final_increment[i] + "</span> </div> </div> - ";
+            basic_IV += final_basic[i] + " - " + final_increment[i] + "- ";
+        }
+        basic_IV += final_basic[i]
+        //console.log(basic_IV)
+        $("#basic_IV").html(basic_IV)
     })
 </script>
 
