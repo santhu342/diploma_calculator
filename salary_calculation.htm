@@ -25,12 +25,37 @@
   <h5>Salary Scale</h5>
   <p>6700-200-7300-220-7960-240-8680-260-9460-280-10300-300-11200-330-12190-360-13270-390-14440-420-15700-450-17050-490-18520-530-20110-570-21820-610-23650-650-25600-700-27700-750-29950-800-32350-850-34900-900-37600-970-40510-1040-43630-1110-46960</p>  <!-- -1200-51760-1300-55660 -->
   
-  
 </div>
 
 </body>
 </html>
-
+<script>
+    $(document).ready(function(){
+        
+        let st_basic = 6700;
+        
+        let st_increment = 200;
+        
+        const incremetn_add = [0,20,30,40,50,70,90]
+        
+        let final_basic = [st_basic],final_increment = [],j = k = 0;
+        for(var i = 0;i<72;i++){
+            //console.log(st_increment)
+            if(j%3 == 0){
+                st_increment = st_increment + incremetn_add[k]
+                if(j%15 == 0)
+                k++;
+            }
+            st_basic = st_basic+st_increment;
+            
+            final_basic.push(st_basic)
+            final_increment.push(st_increment)
+            j++;
+        } 
+        console.log(final_basic , final_increment)
+        
+    })
+</script>
 
 
 
