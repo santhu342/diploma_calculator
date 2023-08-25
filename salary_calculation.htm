@@ -24,10 +24,54 @@
     <h1>ANITS Salary Calculation</h1>
     <h5>Salary Scale</h5>
     <div class="row">
-        <div class="col-sm-7">
+        <div class="col-sm-8">
+            <form>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="basic" placeholder="Basic Salary" value="11530" />
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="da" placeholder="DA %" value="52.5" />
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="other" placeholder="Other Amount" value="0" />
+                </div>
+                <button type="button" id="calculation" class="btn btn-primary btn-block">Salary Calculation</button>
+            </form>
+            <br />
+            <br />
             
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered">
+                     <thead class="thead-dark">
+                        <tr class="text-center">
+                            <th>Basic (A)</th>
+                            <th>DA <span id="da_per"></span>%(B)</th>
+                            <th>HRA 12%(C)</th>
+                            <th>Others (D)</th>
+                            <th>Total Salary (A+B+C+D)=(E)</th>
+                            <th>ESI 0.75%(F)</th>
+                            <th>PF (G)</th>
+                            <th>PTax (H)</th>
+                            <th>By Account (E-F-G-H)</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                            <td><span id="basic"></span></td>
+                            <td><span id="da"></span></td>
+                            <td><span id="hra"></span></td>
+                            <td><span id="other"></span></td>
+                            <td><span id="total"></span></td>
+                            <td><span id="esi"></span></td>
+                            <td><span id="pf"></span></td>
+                            <td><span id="pt"></span></td>
+                            <td><span id="by_acc"></span></td>                            
+                        </tr>
+                     </tbody>
+                </table>
+            </div>
         </div>
-        <div class="col-sm-5">
+        <div class="col-sm-4">
             <p>6700-200-7300-220-7960-240-8680-260-9460-280-10300-300-11200-330-12190-360-13270-390-14440-420-15700-450-17050-490-18520-530-20110-570-21820-610-23650-650-25600-700-27700-750-29950-800-32350-850-34900-900-37600-970-40510-1040-43630-1110-46960</p>  <!-- -1200-51760-1300-55660 -->
             <div class="row" id="basic_IV">
         </div>
@@ -53,11 +97,11 @@
         for(var i = 0;i<72;i++){
             //console.log(st_increment)
             if(j%3 == 0){
-                st_increment = st_increment + incremetn_add[k]
+                st_increment +=  incremetn_add[k]
                 if(j%15 == 0)
                 k++;
             }
-            st_basic = st_basic+st_increment;
+            st_basic += st_increment;
             
             final_basic.push(st_basic)
             final_increment.push(st_increment)
@@ -74,6 +118,39 @@
         basic_IV += final_basic[i]
         //console.log(basic_IV)
         $("#basic_IV").html(basic_IV)
+        
+        
+        $("#calculation").click(function(){
+            
+            var basic = parseInt($("input[name='basic']").val())
+            var da = parseFloat($("input[name='da']").val())
+            var other = parseInt($("input[name='other']").val())
+            
+            var da_amount = Math.round(basic*da/100)
+            var hra_amount = Math.round(basic*12/100)
+            
+            var total = basic + da_amount + other + hra_amount
+            
+            var esi_amount = Math.round(total*0.75/100)
+            var pf_amount = Math.round((basic+da_amount)*12/100)
+            pf_amount = pf_amount > 1800 ? 1800 : pf_amount
+            var pt_amount = total > 20000 ? 200 : total > 15000 ? 150 : 0
+            
+            
+            var by_acc = total - esi_amount - pf_amount - pt_amount
+            
+            $("#basic").text(basic)
+            $("#da_per").text(da)
+            $("#da").text(da_amount)
+            $("#hra").text(hra_amount)
+            $("#other").text(other)
+            
+            $("#total").text(total)
+            $("#esi").text(esi_amount)
+            $("#pf").text(pf_amount)
+            $("#pt").text(pt_amount)
+            $("#by_acc").text(by_acc)    
+        })
     })
 </script>
 
