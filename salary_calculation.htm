@@ -150,6 +150,7 @@
             var basic = parseInt($("input[name='basic']").val())
             var da = parseFloat($("input[name='da']").val())
             var da_new = parseFloat($("input[name='da_new']").val())
+            da_new = isNaN(da_new) ? da : da_new
             var other = parseInt($("input[name='other']").val())
             
             var new_inc = parseInt($("#new_inc option:selected" ).val());
@@ -165,7 +166,8 @@
             old_sal = salary(basic,da,other);
             new_sal = salary(new_basic,da_new,other);
             
-            //console.log(new_sal);
+            console.log(new_basic,da_new,other);
+            console.log(da,da_new);
             
             var tr_data = "<tr>"
                         + "<td>"+ old_sal['basic'] +"</td>"
