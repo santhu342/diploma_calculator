@@ -84,7 +84,19 @@
             </div>
           </div>
           
-          <button type="button" id="view_marks" class="btn btn-primary btn-block">View MArks</button>
+          <div class="form-group">
+            <label for="email">7th Sem Marks</label>
+            <div class="row">
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="sen_th" placeholder="Enter 7th Sem Marks" />
+                </div>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="sen_th_t" placeholder="Enter 7th Sem Total Marks" />
+                </div>
+            </div>
+          </div>
+          
+          <button type="button" id="view_marks" class="btn btn-primary btn-block">View Marks</button>
         </form>
         <br /><br /><br />
     </div>
@@ -112,18 +124,20 @@ $(document).ready(function(){
         fu_th = parseInt($("input[name='fu_th']").val()),
         fi_th = parseInt($("input[name='fi_th']").val()),
         si_th = parseInt($("input[name='si_th']").val()),
+        sen_th = parseInt($("input[name='sen_th']").val()),
         
         f_st_t = parseInt($("input[name='f_st_t']").val()),
         t_rt_t = parseInt($("input[name='t_rt_t']").val()),
         fu_th_t = parseInt($("input[name='fu_th_t']").val()),
         fi_th_t = parseInt($("input[name='fi_th_t']").val()),
-        si_th_t = parseInt($("input[name='si_th_t']").val())
+        si_th_t = parseInt($("input[name='si_th_t']").val()),
+        sen_th_t = parseInt($("input[name='sen_th_t']").val())
         
         f_st = Math.round(f_st*25/100)
         f_st_t = Math.round(f_st_t*25/100)
         
-        award = f_st + t_rt + fu_th + fi_th + si_th;
-        total = f_st_t + t_rt_t + fu_th_t + fi_th_t + si_th_t;
+        award = f_st + t_rt + fu_th + fi_th + si_th + sen_th;
+        total = f_st_t + t_rt_t + fu_th_t + fi_th_t + si_th_t + sen_th_t;
         
         percent = ((award/total)*100).toFixed(2);
         
