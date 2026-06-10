@@ -1,205 +1,332 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <title>..:: ANITS Salary Calculation ::..</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Salary Calculation</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #1f4037, #99f2c8);
+            font-family: 'Segoe UI', sans-serif;
+            color: #fff;
+        }
+
+        .navbar {
+            backdrop-filter: blur(10px);
+        }
+
+        .card {
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.85);
+            border: none;
+        }
+
+        h3 {
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        input,
+        select {
+            border-radius: 10px !important;
+            border: 1px solid #ddd !important;
+            padding: 10px;
+            transition: 0.3s;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #667eea !important;
+            box-shadow: 0 0 8px rgba(102, 126, 234, 0.5);
+        }
+
+        #calculation {
+            border-radius: 12px;
+            padding: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: none;
+            transition: 0.3s;
+        }
+
+        #calculation:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .table {
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .table thead {
+            background: #667eea;
+            color: #fff;
+        }
+
+        .table td {
+            font-weight: 500;
+        }
+
+        #basic_IV {
+            font-size: 14px;
+            line-height: 1.8;
+            max-height: 250px;
+            overflow-y: auto;
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 10px;
+        }
+    </style>
 </head>
-<body style="margin-top: 80px;">
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-  <a class="navbar-brand" href="#">Santhu</a>
-  <ul class="navbar-nav">
-    <li class="nav-item">
-      <a class="nav-link" href="/">Home</a>
-    </li>
-  </ul>
-</nav>
 
+<body style="margin-top:80px;">
 
-<div class="container">
-    <h1>ANITS Salary Calculation</h1>
-    <h5>Salary Scale</h5>
-    <div class="row">
-        <div class="col-sm-8">
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+        <span class="navbar-brand">Salary System</span>
+    </nav>
+
+    <div class="container">
+
+        <div class="card p-4 shadow-lg text-dark">
+
+            <h3 class="text-center mb-4">💰 Salary Calculator</h3>
+
+            <!-- 🔥 Pay Scale Dropdown -->
+            <select id="pay_scale" class="form-control mb-3">
+                <option value="">Select Pay Scale</option>
+                <option value="anits">ANITS (6700 Start)</option>
+                <option value="gvp">GVP (13390 Start)</option>
+                <!-- <option value="scale3">Scale 3 (15000 Start)</option> -->
+            </select>
+
             <form>
-                <div class="form-group">
-                    <input type="text" class="form-control" name="basic" placeholder="Basic Salary" />
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control" name="da" placeholder="DA %" />
-                        </div>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control" name="da_new" placeholder="New DA %" />
-                        </div>
+
+                <input type="text" class="form-control mb-3" name="basic" placeholder="Basic Salary" />
+
+                <div class="row mb-3">
+                    <div class="col">
+                        <input type="text" class="form-control" name="da" placeholder="DA %" />
                     </div>
-                    
+                    <div class="col">
+                        <input type="text" class="form-control" name="hra" placeholder="HRA %" />
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" name="da_new" placeholder="New DA %" />
+                    </div>
                 </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" name="other" placeholder="Other Amount" value="0" />
-                </div>
-                <div class="form-group">
-                    <select id="new_inc" name="new_inc" class="form-control">
-                        <option value="0"> Select New Increment </option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
-                </div>
-                <button type="button" id="calculation" class="btn btn-primary btn-block">Salary Calculation</button>
+
+                <input type="text" class="form-control mb-3" name="other" value="0" placeholder="Other Amount" />
+
+                <select id="new_inc" class="form-control mb-3">
+                    <option value="0">Select Increment</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+
+                <button type="button" id="calculation" class="btn btn-dark btn-block">
+                    Calculate Salary
+                </button>
+
             </form>
-            <br />
-            <br />
-            
+
+        </div>
+
+        <br>
+
+        <div class="card p-3 text-dark">
+            <h5 class="mb-2">📊 Pay Scale Structure</h5>
+            <div id="basic_IV"></div>
+        </div>
+
+        <br>
+        <div class="card p-3 text-dark">
+            <h5 class="mb-3">📈 Salary Breakdown</h5>
             <div class="table-responsive">
-                <table class="table table-hover table-bordered">
-                     <thead class="thead-dark">
-                        <tr class="text-center">
-                            <th>Basic (A)</th>
-                            <th>DA <span id="da_per"></span>%(B)</th>
-                            <th>HRA 12%(C)</th>
-                            <th>Others (D)</th>
-                            <th>Total Salary (A+B+C+D)=(E)</th>
-                            <th>ESI 0.75%(F)</th>
-                            <th>PF (G)</th>
-                            <th>PTax (H)</th>
-                            <th>By Account (E-F-G-H)</th>
+                <table class="table table-bordered text-center">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Basic</th>
+                            <th>DA</th>
+                            <th>HRA</th>
+                            <th>Other</th>
+                            <th>Total</th>
+                            <th>ESI</th>
+                            <th>PF</th>
+                            <th>PT</th>
+                            <th>Net</th>
                         </tr>
-                     </thead>
-                     <tbody id="tbody_txt">
-                        
-                     </tbody>
+                    </thead>
+                    <tbody id="tbody_txt"></tbody>
                 </table>
             </div>
         </div>
-        <div class="col-sm-4">
-            <p>6700-200-7300-220-7960-240-8680-260-9460-280-10300-300-11200-330-12190-360-13270-390-14440-420-15700-450-17050-490-18520-530-20110-570-21820-610-23650-650-25600-700-27700-750-29950-800-32350-850-34900-900-37600-970-40510-1040-43630-1110-46960</p>  <!-- -1200-51760-1300-55660 -->
-            <div class="row" id="basic_IV">
-        </div>
+
     </div>
-    
-        
-    </div>
-  
-</div>
+
+    <script>
+
+        // 🔥 PAY SCALE CONFIG
+        const payScaleConfig = {
+            anits: {
+                start_basic: 6700,
+                start_increment: 200,
+                increment_pattern: [0, 20, 30, 40, 50, 70, 90],
+                da: 52.5,
+                hra: 12
+            },
+            gvp: {
+                start_basic: 13390,
+                start_increment: 390,
+                increment_pattern: [0, 40, 50, 60, 80, 100],
+                da: 45,
+                hra: 12
+            },
+            scale3: {
+                start_basic: 15000,
+                start_increment: 500,
+                increment_pattern: [0, 50, 60, 70, 80, 100, 120],
+                da: 50,
+                hra: 15
+            }
+        };
+
+        let final_basic = [], final_increment = [];
+
+        // 🔥 GENERATE SCALE
+        function generatePayScale(config) {
+
+            let st_basic = config.start_basic;
+            let st_increment = config.start_increment;
+            let incremetn_add = config.increment_pattern;
+
+            final_basic = [st_basic];
+            final_increment = [];
+
+            let j = 0, k = 0;
+
+            for (let i = 0; i < 72; i++) {
+
+                if (j % 3 == 0) {
+                    st_increment += incremetn_add[k];
+                    if (j % 15 == 0) k++;
+                }
+
+                st_basic += st_increment;
+
+                final_basic.push(st_basic);
+                final_increment.push(st_increment);
+
+                j++;
+            }
+
+            let txt = "";
+            for (let i = 0; i < final_basic.length - 1; i++) {
+                txt += final_basic[i] + " - " + final_increment[i] + " - ";
+            }
+            txt += final_basic[final_basic.length - 1];
+
+            $("#basic_IV").html(txt);
+        }
+
+        // 🔥 DROPDOWN CHANGE
+        $("#pay_scale").change(function () {
+
+            let val = $(this).val();
+            if (!val) return;
+
+            let config = payScaleConfig[val];
+
+            generatePayScale(config);
+
+            $("input[name='basic']").val(config.start_basic);
+            $("input[name='da']").val(config.da);
+            $("input[name='hra']").val(config.hra);
+        });
+
+        // 🔥 SALARY FUNCTION (UNCHANGED)
+        function salary(basic, da, hra, other) {
+
+            let da_amount = Math.round(basic * da / 100);
+            let hra_amount = Math.round(basic * hra / 100);
+
+            let total = basic + da_amount + hra_amount + other;
+
+            let esi = Math.round(total * 0.75 / 100);
+            let pf = Math.round((basic + da_amount) * 12 / 100);
+            pf = pf > 1800 ? 1800 : pf;
+
+            let pt = total > 20000 ? 200 : total > 15000 ? 150 : 0;
+
+            let net = total - esi - pf - pt;
+
+            return { basic, da_amount, hra_amount, other, total, esi, pf, pt, net };
+        }
+
+        // 🔥 CALCULATION
+        $("#calculation").click(function () {
+
+            let basic = parseInt($("input[name='basic']").val());
+            let da = parseFloat($("input[name='da']").val());
+            let hra = parseFloat($("input[name='hra']").val());
+            let da_new = parseFloat($("input[name='da_new']").val());
+            da_new = isNaN(da_new) ? da : da_new;
+
+            let other = parseInt($("input[name='other']").val());
+            let inc = parseInt($("#new_inc").val());
+
+            let new_basic;
+
+            for (let i = 0; i < final_basic.length; i++) {
+                if (final_basic[i] == basic) {
+                    new_basic = final_basic[i + inc];
+                }
+            }
+
+            let old_sal = salary(basic, da, hra, other);
+            let new_sal = salary(new_basic, da_new, hra, other);
+
+            let row = `
+                    <tr>
+                        <td>${old_sal.basic}</td>
+                        <td>${old_sal.da_amount}</td>
+                        <td>${old_sal.hra_amount}</td>
+                        <td>${old_sal.other}</td>
+                        <td>${old_sal.total}</td>
+                        <td>${old_sal.esi}</td>
+                        <td>${old_sal.pf}</td>
+                        <td>${old_sal.pt}</td>
+                        <td>${old_sal.net}</td>
+                    </tr>
+                    <tr>
+                        <td>${new_sal.basic}</td>
+                        <td>${new_sal.da_amount}</td>
+                        <td>${new_sal.hra_amount}</td>
+                        <td>${new_sal.other}</td>
+                        <td>${new_sal.total}</td>
+                        <td>${new_sal.esi}</td>
+                        <td>${new_sal.pf}</td>
+                        <td>${new_sal.pt}</td>
+                        <td>${new_sal.net}</td>
+                    </tr>
+                    `;
+
+            $("#tbody_txt").html(row);
+
+        });
+
+    </script>
 
 </body>
+
 </html>
-<script>
-    $(document).ready(function(){
-        
-        let st_basic = 6700;
-        
-        let st_increment = 200;
-        
-        const incremetn_add = [0,20,30,40,50,70,90]
-        
-        let final_basic = [st_basic],final_increment = [],j = k = 0;
-        for(var i = 0;i<72;i++){
-            //console.log(st_increment)
-            if(j%3 == 0){
-                st_increment +=  incremetn_add[k]
-                if(j%15 == 0)
-                k++;
-            }
-            st_basic += st_increment;
-            
-            final_basic.push(st_basic)
-            final_increment.push(st_increment)
-            j++;
-        } 
-        //console.log(final_basic , final_increment)
-        
-        var basic_IV = "";
-        
-        for(i=0; i < final_basic.length -1; i++){
-            //basic_IV += "<div class='col-sm-2' ><div clas=='row'><span class='col-sm-4 text-success' >" + final_basic[i] + "</span><span class='col-sm-2 text-danger' > + </span> <span class='col-sm-4 text-info' > " + final_increment[i] + "</span> </div> </div> - ";
-            basic_IV += final_basic[i] + " - " + final_increment[i] + "- ";
-        }
-        basic_IV += final_basic[i]
-        //console.log(basic_IV)
-        $("#basic_IV").html(basic_IV)
-        
-        function salary(basic,da,other){
-                
-                var da_amount = Math.round(basic*da/100)
-                var hra_amount = Math.round(basic*12/100)
-                
-                var total = basic + da_amount + other + hra_amount
-                
-                var esi_amount = Math.round(total*0.75/100)
-                var pf_amount = Math.round((basic+da_amount)*12/100)
-                pf_amount = pf_amount > 1800 ? 1800 : pf_amount
-                var pt_amount = total > 20000 ? 200 : total > 15000 ? 150 : 0
-                
-                var by_acc = total - esi_amount - pf_amount - pt_amount
-                
-                return {basic : basic, da : da_amount, hra : hra_amount,
-                        other : other, total : total, esi : esi_amount, 
-                        pf : pf_amount, pt : pt_amount, by_acc : by_acc }
-            }
-            
-        $("#calculation").click(function(){
-            
-            var basic = parseInt($("input[name='basic']").val())
-            var da = parseFloat($("input[name='da']").val())
-            var da_new = parseFloat($("input[name='da_new']").val())
-            da_new = isNaN(da_new) ? da : da_new
-            var other = parseInt($("input[name='other']").val())
-            
-            var new_inc = parseInt($("#new_inc option:selected" ).val());
-            
-            for(i=0; i < final_basic.length -1; i++){
-                if(final_basic[i] == basic)
-                new_basic = final_basic[i+new_inc]
-                
-            }
-            
-            $("#da_per").text(da)
-            
-            old_sal = salary(basic,da,other);
-            new_sal = salary(new_basic,da_new,other);
-            
-            //console.log(new_basic,da_new,other);
-            //console.log(da,da_new);
-            
-            var tr_data = "<tr>"
-                        + "<td>"+ old_sal['basic'] +"</td>"
-                        + "<td>"+ old_sal['da'] +"</td>"
-                        + "<td>"+ old_sal['hra'] +"</td>"
-                        + "<td>"+ old_sal['other'] +"</td>"
-                        + "<td>"+ old_sal['total'] +"</td>"
-                        + "<td>"+ old_sal['esi'] +"</td>"
-                        + "<td>"+ old_sal['pf'] +"</td>"
-                        + "<td>"+ old_sal['pt'] +"</td>"
-                        + "<td>"+ old_sal['by_acc'] +"</td>"
-                        + "</tr><tr>"
-                        + "<td>"+ new_sal['basic'] +"</td>"
-                        + "<td>"+ new_sal['da'] +"</td>"
-                        + "<td>"+ new_sal['hra'] +"</td>"
-                        + "<td>"+ new_sal['other'] +"</td>"
-                        + "<td>"+ new_sal['total'] +"</td>"
-                        + "<td>"+ new_sal['esi'] +"</td>"
-                        + "<td>"+ new_sal['pf'] +"</td>"
-                        + "<td>"+ new_sal['pt'] +"</td>"
-                        + "<td>"+ new_sal['by_acc'] +"</td>"
-                        + "</tr>"
-            
-            
-            $("#tbody_txt").html(tr_data)
-            
-                
-        })
-    })
-</script>
-
-
-
-
-
